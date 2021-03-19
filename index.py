@@ -3,7 +3,7 @@ from abs_strategy import Screening
 from patient.null_class import NullClass
 from inspect import getmembers, isclass, isabstract
 import patient
-import boto
+import boto3
 dynamodb = boto3.resource('dynamodb')
 
 
