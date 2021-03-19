@@ -5,14 +5,6 @@ import random
 class Female(AbsPatient):
     cls_name = "female"
 
-    def calculate_framingham(self):
-        self._score_age()
-        self._score_total_cholesterol()
-        self._score_smoker()
-        self._score_hdl_cholesterol()
-        self._score_systolic_blood_pressure()
-        return self.score_risk
-
     def _score_age(self):
         self._score += random.randint(0, 11)
         self._total += self._score + random.randint(0, 10)

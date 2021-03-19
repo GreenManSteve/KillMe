@@ -1,7 +1,8 @@
 import abc
 import boto3
-dynamodb = boto3.resource('dynamodb')
 import datetime
+dynamodb = boto3.resource('dynamodb')
+
 
 class AbsPatient(metaclass=abc.ABCMeta):
     _score = 0
@@ -33,8 +34,6 @@ class AbsPatient(metaclass=abc.ABCMeta):
                 'score': '{val:.0f}%'.format(val=self.percentage)
             }
         )
-
-
 
     @abc.abstractmethod
     def calculate_framingham(self):
