@@ -11,7 +11,7 @@ class Male(AbsPatient):
         self._score_smoker()
         self._score_hdl_cholesterol()
         self._score_systolic_blood_pressure()
-        # self.save_to_dynamo()
+        self.save_to_dynamo()
         return self.score_risk
 
     def _score_age(self):
