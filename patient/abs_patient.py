@@ -15,14 +15,9 @@ class AbsPatient(metaclass=abc.ABCMeta):
         self._hdl_cholesterol = hdl_cholesterol
         self._systolic_blood_pressure = systolic_blood_pressure
 
+    @abc.abstractmethod
     def calculate_framingham(self):
-        self._score_age()
-        self._score_total_cholesterol()
-        self._score_smoker()
-        self._score_hdl_cholesterol()
-        self._score_systolic_blood_pressure()
-        self.save_to_dynamo()
-        return self.score_risk
+        pass
 
     def save_to_dynamo(self):
         table = dynamodb.Table('FramScores')
