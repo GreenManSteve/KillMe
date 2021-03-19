@@ -8,7 +8,7 @@ dynamodb = boto3.resource('dynamodb')
 
 
 def testy():
-    table = dynamodb.Table('FramScoresdy')
+    table = dynamodb.Table('FramScores')
     response = table.put_item(
        Item={
             'pk': 'male',
