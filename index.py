@@ -3,22 +3,12 @@ from abs_strategy import Screening
 from patient.null_class import NullClass
 from inspect import getmembers, isclass, isabstract
 import patient
-import boto3
-dynamodb = boto3.resource('dynamodb')
 
 
-def testy():
-    table = dynamodb.Table('FramScores')
-    response = table.put_item(
-       Item={
-            'pk': 'male',
-            'sk': 'test'
-        }
-    )
+
 
 
 def handler(event, context):
-    testy()
     humans = {}
     class_list = getmembers(patient,
                             lambda m: isclass(m) and not isabstract(m))

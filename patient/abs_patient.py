@@ -1,5 +1,7 @@
 import abc
-
+import boto3
+dynamodb = boto3.resource('dynamodb')
+import datetime
 
 class AbsPatient(metaclass=abc.ABCMeta):
     _score = 0
@@ -18,13 +20,21 @@ class AbsPatient(metaclass=abc.ABCMeta):
         self._score_smoker()
         self._score_hdl_cholesterol()
         self._score_systolic_blood_pressure()
+        self.save_to_dynamo()
         return self.score_risk
 
-    def save_to_s3(self):
-        pass
+    def save_to_dynamo(self):
+        table = dynamodb.Table('FramScores')
+        response = table.put_item(
+            Item={
+                'pk': 'fr_{}'.format(datetime.datetime.now()),
+                'sk': '{}'.format(self.name),
+                'age': '{}'.format(self.age),
+                'score': '{val:.0f}%'.format(val=self.percentage)
+            }
+        )
 
-    def _send_mail(self):
-        email(self.email, self.score_risk)
+
 
     @abc.abstractmethod
     def calculate_framingham(self):
