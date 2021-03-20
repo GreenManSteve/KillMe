@@ -29,9 +29,8 @@ def handler(event, context):
             human = humans[sex](age, total_cholesterol, smoker, hdl_cholesterol, systolic_blood_pressure)
             screening = Screening(human)
             result["your_results"] = screening.calculate_framingham()
-            result["cvd_stats"] = screening.calculate_framingham()
             result["Males tested"] = mis.get_test_stats("male")
-            result["Females tested"] = mis.get_test_stats("male")
+            result["Females tested"] = mis.get_test_stats("female")
         else:
             null_class = NullClass(sex)
             result = null_class.calculate_framingham()
