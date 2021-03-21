@@ -37,7 +37,7 @@ def handler(event, context):
                    "systolic_blood_pressure: {}".format(sex, age, total_cholesterol, smoker, hdl_cholesterol,
                                                         systolic_blood_pressure)
             file_id = "{}.txt".format(str(uuid4()))
-            s3.upload_file_to_s3(file, "framscore", file_id, "framingham test data")
+            # s3.upload_file_to_s3(file, "framscore", file_id, "framingham test data")
             human = humans[sex](age, total_cholesterol, smoker, hdl_cholesterol, systolic_blood_pressure)
             screening = Screening(human)
             result["your_results"] = screening.calculate_framingham()
