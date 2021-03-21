@@ -16,7 +16,5 @@ class Mis(object):
             IndexName="sk-index",
             KeyConditionExpression=Key('sk').eq(gender),
         )
-        data = json.loads(response['body'])
-
-        count = (data['Count'])
+        count = response['Count']
         return count

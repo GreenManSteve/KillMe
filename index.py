@@ -40,7 +40,7 @@ def handler(event, context):
                 }
     except KeyError as ex:
         return {'statusCode': 400,
-                'body': json.dumps("The following error occurred: {}. Please provide teh following input variables"
+                'body': json.dumps("The following error occurred: {}. Please provide the following input variables"
                                    "sex (S), age (N), total_cholesterol (N), smoker (true/false),"
                                    "hdl_cholesterol (N), systolic_blood_pressure(N)".format(ex)),
                 'headers': {'Content-Type': 'application/json'}
