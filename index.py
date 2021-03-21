@@ -3,6 +3,8 @@ from abs_strategy import Screening
 from patient.null_class import NullClass
 from inspect import getmembers, isclass, isabstract
 from patient.mis import Mis
+from patient.s3 import S3
+from uuid import uuid4
 import patient
 
 
@@ -26,6 +28,16 @@ def handler(event, context):
         if sex in humans:
             result = dict()
             mis = Mis()
+            s3 = S3()
+            file = "sex: {} \n" \
+                   "age: {}\n" \
+                   "total_cholesterol: {}\n" \
+                   "smoker: {}\n" \
+                   "hdl_cholesterol: {}\n" \
+                   "systolic_blood_pressure: {}".format(sex, age, total_cholesterol, smoker, hdl_cholesterol,
+                                                        systolic_blood_pressure)
+            file_id = "{}.txt".format(str(uuid4()))
+            s3.upload_file_to_s3(file, "framscore", file_id, "framingham test data")
             human = humans[sex](age, total_cholesterol, smoker, hdl_cholesterol, systolic_blood_pressure)
             screening = Screening(human)
             result["your_results"] = screening.calculate_framingham()
