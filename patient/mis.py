@@ -1,7 +1,5 @@
-import json
-
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Key
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('FramScores')
 
@@ -9,6 +7,7 @@ table = dynamodb.Table('FramScores')
 class Mis(object):
     def __init__(self):
         pass
+
 
     def get_test_stats(self, gender):
         response = table.query(
