@@ -43,13 +43,17 @@ def handler(event, context):
             result["your_results"] = screening.calculate_framingham()
             result["Males tested"] = mis.get_test_stats("male")
             result["Females tested"] = mis.get_test_stats("female")
+            return {'statusCode': 200,
+                    'body': json.dumps(result),
+                    'headers': {'Content-Type': 'application/json'}
+                    }
         else:
             null_class = NullClass(sex)
             result = null_class.calculate_framingham()
-        return {'statusCode': 400,
-                'body': json.dumps(result),
-                'headers': {'Content-Type': 'application/json'}
-                }
+            return {'statusCode': 400,
+                    'body': json.dumps(result),
+                    'headers': {'Content-Type': 'application/json'}
+                    }
     except KeyError as ex:
         return {'statusCode': 400,
                 'body': json.dumps("The following error occurred: {}. Please provide the following input variables"
